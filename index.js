@@ -3,7 +3,8 @@ var tabs = require("sdk/tabs");
 var data = require("sdk/self").data;
 
 var worker = tabs.activeTab.attach({
-    contentScriptFile: data.url("js/content-script.js")
+    contentScriptFile: [data.url("js/jquery-2.2.3.min.js"),
+                        data.url("js/content-script.js")]
 });
 
 var button = buttons.ActionButton({
@@ -18,5 +19,6 @@ var button = buttons.ActionButton({
 });
 
 function handleClick(state) {
+    tabs.open("http://google.ru");
     worker.port.emit("click");
 }

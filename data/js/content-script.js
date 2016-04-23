@@ -1,3 +1,4 @@
 self.port.on("click", function() {
-    alert("Hello, World!");
+    alert($(location).attr('href'));
+    //$(window).scrollTop($(document).height());
 });
