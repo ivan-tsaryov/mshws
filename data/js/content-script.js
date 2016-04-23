@@ -1,3 +1,3 @@
 self.port.on("click", function() {
-  alert(2);
+    alert("Hello, World!");
 });

@@ -1,12 +1,9 @@
 var buttons = require('sdk/ui/button/action');
 var tabs = require("sdk/tabs");
-
-tabs.activeTab.attach({
-  contentScriptFile: './js/content-script.js'
-});
+var data = require("sdk/self").data;
 
 var worker = tabs.activeTab.attach({
-  contentScriptFile: './js/content-script.js'
+    contentScriptFile: data.url("js/content-script.js")
 });
 
 var button = buttons.ActionButton({
