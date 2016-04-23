@@ -1,1 +1,3 @@
-alert(1);
+self.port.on("click", function() {
+  alert(2);
+});
