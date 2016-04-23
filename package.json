@@ -1,0 +1,16 @@
+{
+  "title": "Best Addon Around The World",
+  "name": "mshws",
+  "version": "0.0.1",
+  "description": "Navigate between the new comments at the myshows.ru",
+  "main": "index.js",
+  "author": "Ivan Tsaryov",
+  "engines": {
+    "firefox": ">=38.0a1",
+    "fennec": ">=38.0a1"
+  },
+  "license": "MIT",
+  "keywords": [
+    "jetpack"
+  ]
+}
