@@ -2,7 +2,9 @@ var buttons = require('sdk/ui/button/action');
 var tabs = require("sdk/tabs");
 var data = require("sdk/self").data;
 
-var comments;
+var worker;
+
+var id = 0;
 
 var button = buttons.ActionButton({
     id: "mozilla-link",
@@ -15,11 +17,17 @@ var button = buttons.ActionButton({
     onClick: handleClick
 });
 
-function handleClick(state) {
-    var worker = tabs.activeTab.attach({
+tabs.on("ready", function(tab) {
+    worker = tab.attach({
         contentScriptFile: [data.url("js/jquery-2.2.3.min.js"),
-                        data.url("js/content-script.js")]
+            data.url("js/content-script.js") ]
     });
-    
-    worker.port.emit("click", comments);
+    worker.port.on("id_change", function() {
+        id = 1;
+    });
+});
+
+function handleClick(state) {
+    worker.port.emit("click", id);
+    id++;
 }

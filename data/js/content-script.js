@@ -1,12 +1,15 @@
-self.port.on("click", function(comments) {
-    /*
-    $("div[data-comment-id]").eq(0).removeAttr("data-comment-id");
-    $("div[data-comment-id]").eq(0).removeAttr("data-comment-id");
-    $(window).scrollTop($('div[data-comment-id]').offset().top);
-    */
-    
-    var $el = $("div[class~='_hint']").eq(0);
-    $("div[class~='_hint']").eq(0).attr("class", $el.attr("class").replace("_hint", ""));
-    
-    $(window).scrollTop( $("div[class~='_hint']").eq(0).offset().top);
+self.port.on("click", function(id) {
+	var $comments = $("div[class~='_hint']");
+
+	if (id >= $comments.length) {
+		id = 0;
+		self.port.emit("id_change");
+	}
+
+	$("div[class~='_hint']").each(function(index) {
+		if (index == id)
+			$('html, body').animate({
+				scrollTop: $(this).offset().top
+			}, 300);
+	});
 });
