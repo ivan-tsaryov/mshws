@@ -6,7 +6,7 @@ var comments;
 
 var button = buttons.ActionButton({
     id: "mozilla-link",
-    label: "Visit Mozilla",
+    label: "Click me",
     icon: {
         "16": "./icon-16.png",
         "32": "./icon-32.png",

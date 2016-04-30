@@ -1,7 +1,7 @@
 {
   "title": "mshws",
   "name": "mshws",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Navigate between the new comments at the myshows.ru",
   "main": "index.js",
   "author": "Ivan Tsaryov",
