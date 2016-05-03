@@ -17,7 +17,7 @@ var button = buttons.ActionButton({
     onClick: handleClick
 });
 
-tabs.on("ready", function(tab) {
+tabs.activeTab.on("ready", function(tab) {
     worker = tab.attach({
         contentScriptFile: [data.url("js/jquery-2.2.3.min.js"),
             data.url("js/content-script.js") ]
