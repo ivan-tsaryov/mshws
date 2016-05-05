@@ -4,7 +4,8 @@ var data = require("sdk/self").data;
 
 var worker;
 
-var id = 0;
+var $comments = null;
+var id = 1;
 
 var button = buttons.ActionButton({
     id: "mozilla-link",
@@ -17,17 +18,23 @@ var button = buttons.ActionButton({
     onClick: handleClick
 });
 
-tabs.activeTab.on("ready", function(tab) {
+function handleClick(state) {
+    worker.port.emit("click", id, $comments);
+    id++;
+}
+
+tabs.on('ready', function onOpen(tab) {
     worker = tab.attach({
         contentScriptFile: [data.url("js/jquery-2.2.3.min.js"),
-            data.url("js/content-script.js") ]
+                        data.url("js/content-script.js") ]
     });
     worker.port.on("id_change", function() {
         id = 1;
     });
+
+    worker.port.on("got_comments", function($input) {
+        $comments = $input;
+    });
+
 });
 
-function handleClick(state) {
-    worker.port.emit("click", id);
-    id++;
-}
