@@ -1,31 +1,17 @@
-self.port.on("click", function(id, $comments) {
-	if ($comments === null) {
-		$comments = $("div[class~='_hint']");
-		self.port.emit("got_comments", $comments);
+self.port.on("click", function(curr_id) {
+	var $comments = $("div[class~='_hint']");
+
+	if (curr_id == $comments.length) {
+		curr_id = 0;
 	}
 
-	if (id >= $comments.length) {
-		id = 0;
-		self.port.emit("id_change");
-	}
-
-	$("div[class~='_hint']").each(function(index) {
-  		if (index == id) {
-			var elOffset = $(this).offset().top;
-	  		var elHeight = $(this).height();
-	  		var windowHeight = $(window).height();
-	  		var offset;
-
-	  		if (elHeight < windowHeight) {
-	    		offset = elOffset - ((windowHeight / 2) - (elHeight / 2));
-	  		}
-	  		else {
-	    		offset = elOffset;
-	  		}
-
+	$comments.each(function(index) {
+  		if (index == curr_id) {
 			$('html, body').animate({
-				scrollTop: offset
+				scrollTop: $(this).offset().top
 			}, 300);
+			return false;
 		}
 	});
+	self.port.emit("curr_id_change", ++curr_id);
 });

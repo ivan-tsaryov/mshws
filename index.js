@@ -4,8 +4,7 @@ var data = require("sdk/self").data;
 
 var worker;
 
-var $comments = null;
-var id = 1;
+var curr_id = 1;
 
 var button = buttons.ActionButton({
     id: "mozilla-link",
@@ -19,8 +18,7 @@ var button = buttons.ActionButton({
 });
 
 function handleClick(state) {
-    worker.port.emit("click", id, $comments);
-    id++;
+    worker.port.emit("click", curr_id);
 }
 
 tabs.on('ready', function onOpen(tab) {
@@ -28,13 +26,9 @@ tabs.on('ready', function onOpen(tab) {
         contentScriptFile: [data.url("js/jquery-2.2.3.min.js"),
                         data.url("js/content-script.js") ]
     });
-    worker.port.on("id_change", function() {
-        id = 1;
-    });
 
-    worker.port.on("got_comments", function($input) {
-        $comments = $input;
+    worker.port.on("curr_id_change", function(input_id) {
+        curr_id = input_id;
     });
-
 });
 
