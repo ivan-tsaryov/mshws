@@ -10,9 +10,21 @@ self.port.on("click", function(id, $comments) {
 	}
 
 	$("div[class~='_hint']").each(function(index) {
-		if (index == id) {
+  		if (index == id) {
+			var elOffset = $(this).offset().top;
+	  		var elHeight = $(this).height();
+	  		var windowHeight = $(window).height();
+	  		var offset;
+
+	  		if (elHeight < windowHeight) {
+	    		offset = elOffset - ((windowHeight / 2) - (elHeight / 2));
+	  		}
+	  		else {
+	    		offset = elOffset;
+	  		}
+
 			$('html, body').animate({
-				scrollTop: $(this).offset().top
+				scrollTop: offset
 			}, 300);
 		}
 	});
