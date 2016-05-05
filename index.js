@@ -21,7 +21,9 @@ function handleClick(state) {
     worker.port.emit("click", curr_id);
 }
 
-tabs.on('ready', function onOpen(tab) {
+tabs.on('activate', function(tab) {
+	console.log(tab.url);
+
     worker = tab.attach({
         contentScriptFile: [data.url("js/jquery-2.2.3.min.js"),
                         data.url("js/content-script.js") ]
