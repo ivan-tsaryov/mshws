@@ -10,9 +10,9 @@ var button = buttons.ActionButton({
     id: "mozilla-link",
     label: "Click me",
     icon: {
-        "16": "./icon-16.png",
-        "32": "./icon-32.png",
-        "64": "./icon-64.png"
+        "16": "./icon-16.svg",
+        "32": "./icon-32.svg",
+        "64": "./icon-64.svg"
     },
     onClick: handleClick
 });
@@ -21,7 +21,10 @@ function handleClick(state) {
     worker.port.emit("click", curr_id);
 }
 
-tabs.on('activate', function(tab) {
+tabs.on('activate', initWorker);
+tabs.on('open', initWorker);
+
+function initWorker(tab) {
 	console.log(tab.url);
 
     worker = tab.attach({
@@ -32,5 +35,5 @@ tabs.on('activate', function(tab) {
     worker.port.on("curr_id_change", function(input_id) {
         curr_id = input_id;
     });
-});
+}
 

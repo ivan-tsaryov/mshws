@@ -1,8 +1,8 @@
 {
-  "title": "mshws",
-  "name": "mshws",
-  "version": "0.0.5",
-  "description": "Navigate between the new comments at the myshows.ru",
+  "title": "myshowigate",
+  "name": "myshowigate",
+  "version": "0.1",
+  "description": "Navigate between new comments at the myshows.me",
   "main": "index.js",
   "author": "Ivan Tsaryov",
   "engines": {
