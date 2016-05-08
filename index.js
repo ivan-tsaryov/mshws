@@ -18,22 +18,15 @@ var button = buttons.ActionButton({
 });
 
 function handleClick(state) {
-    worker.port.emit("click", curr_id);
-}
-
-tabs.on('activate', initWorker);
-tabs.on('open', initWorker);
-
-function initWorker(tab) {
-	console.log(tab.url);
-
-    worker = tab.attach({
+	worker = tabs.activeTab.attach({
         contentScriptFile: [data.url("js/jquery-2.2.3.min.js"),
                         data.url("js/content-script.js") ]
     });
 
     worker.port.on("curr_id_change", function(input_id) {
-        curr_id = input_id;
+       	curr_id = input_id;
     });
+
+    worker.port.emit("click", curr_id);
 }
 

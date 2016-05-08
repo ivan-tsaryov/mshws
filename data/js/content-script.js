@@ -10,8 +10,9 @@ self.port.on("click", function(curr_id) {
 			$('html, body').animate({
 				scrollTop: $(this).offset().top
 			}, 300);
+
+			self.port.emit("curr_id_change", ++curr_id);
 			return false;
 		}
 	});
-	self.port.emit("curr_id_change", ++curr_id);
 });
